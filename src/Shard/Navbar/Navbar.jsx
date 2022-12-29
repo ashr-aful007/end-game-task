@@ -9,6 +9,8 @@ import {
   MdPermMedia,
 } from 'react-icons/fa';
 import { AuthContext } from '../../Contaxt/AuthProvider';
+import { toast } from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 
 
 
@@ -16,6 +18,15 @@ import { AuthContext } from '../../Contaxt/AuthProvider';
 const Navbar = () => {
   const [nav, setNav] = useState(false);
   const handleClick = () => setNav(!nav);
+  const {user,logOut} = useContext(AuthContext)
+
+  const handleLogout = () =>{
+     logOut()
+     .then(() =>{
+        toast.success('Logout successfuly')
+     })
+     .catch(err => console.log(err))
+  }
   
   return (
     <div className='fixed w-full h-[65px] flex justify-between items-center px-4 bg-[#2b66bf] text-gray-300'>
@@ -27,13 +38,16 @@ const Navbar = () => {
       {/* menu */}
       <ul className='hidden md:flex'>
         <li>
-          <a href='/'>Media</a>
+          <Link to='/'>Media</Link>
         </li>
         <li>
-        <a href='/signup'>SignUp</a>
+        <Link to='/signup'>SignUp</Link>
         </li>
         <li>
-        <a href='/skills'>About</a>
+        <Link to='/about'>About</Link>
+        </li>
+        <li>
+        { user?.email &&<button onClick={handleLogout}>Log Out</button>}
         </li>
       </ul>
 
@@ -51,13 +65,16 @@ const Navbar = () => {
         }
       >
         <li className='py-6 text-4xl'>
-        <a href='/'>Media</a>
+        <Link href='/'>Media</Link>
         </li>
         <li className='py-6 text-4xl'>
-        <a href='/about'>Message</a>
+        <Link href='/about'>Message</Link>
         </li>
         <li className='py-6 text-4xl'>
-        <a href='/skills'>About</a>
+        <Link href='/about'>About</Link>
+        </li>
+        <li className='py-6 text-4xl'>
+          { user?.email &&<button className='btn' onClick={handleLogout}>Log Out</button>}
         </li>
       </ul>
     </div>

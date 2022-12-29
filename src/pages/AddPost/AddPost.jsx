@@ -1,18 +1,19 @@
-import moment from 'moment/moment';
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { FaUpload } from "react-icons/fa";
 import { json } from 'react-router-dom';
+import { AuthContext } from '../../Contaxt/AuthProvider';
 
 
 
 
 
-function AddPost() {
+function AddPost({refetch}) {
   const {register,reset,handleSubmit,formState: { errors }} = useForm()
-  const [loginError, setSignInError] = useState('')
-
   const imageHostKey = process.env.REACT_APP_imgbb_key;
+  const {user} = useContext(AuthContext)
+ 
   
 
   const handlePost = (data) =>{
@@ -28,10 +29,12 @@ function AddPost() {
     .then(imgData => {
       if(imgData.success){
         const userPost ={
-          // email,
+          email: user?.email,
           post: data.post,
           img: imgData.data.url,
-          time: moment().startOf('hour').fromNow()
+          time: new Date(),
+          like:[],
+          love:[]
         }
 
         fetch('http://localhost:5000/userpost', {
@@ -42,14 +45,18 @@ function AddPost() {
            body: JSON.stringify(userPost)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+          toast.success('post successfuly')
+          refetch()
+          reset()
+        })
       }
     })
   }
 
 
   return (
-    <div className='h-52 rounded-md bg-white'>
+    <div className='h-52 w-96 rounded-md bg-white'>
      <form onSubmit={handleSubmit(handlePost)}>
      <div>
      <textarea {...register("post",{required: "please provide text"})} className="textarea border-gray-500 w-full " placeholder="what's your mind?"></textarea>
