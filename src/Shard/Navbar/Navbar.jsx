@@ -65,10 +65,10 @@ const Navbar = () => {
         }
       >
         <li className='py-6 text-4xl'>
-        <Link href='/'>Media</Link>
+        <Link to='/'>Media</Link>
         </li>
         <li className='py-6 text-4xl'>
-        <Link href='/about'>Message</Link>
+        <Link to='/signup'>SignUp</Link>
         </li>
         <li className='py-6 text-4xl'>
         <Link href='/about'>About</Link>

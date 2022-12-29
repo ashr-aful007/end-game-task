@@ -13,9 +13,9 @@ function Home() {
    
   return (
      <div className='pt-28'>
-      <div className='grid grid-rows-2 md:gap-10 md:grid-cols-2 h-full m-5'>
+      <div className='grid grid-rows-2 md:gap-10 md:grid-cols-2 m-5'>
           <div>
-             <div className=' h-screen'>
+             <div className=''>
              <div>
              <AddPost refetch={refetch}></AddPost>
                 
@@ -26,7 +26,7 @@ function Home() {
              </div>
              </div>
           </div>
-          <div className='h-screen'>
+          <div className=''>
              <p className='text-2xl mb-10'>popular post</p>
              <PopularPost></PopularPost>
           </div>

@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { FaRegHeart, FaRegThumbsUp } from 'react-icons/fa'
@@ -8,7 +8,9 @@ import ShowComment from '../ShowComment/ShowComment'
 
 function ShowDetails() {
      const {register,reset,handleSubmit,formState: { errors }} = useForm()
-          const postDetails = useLoaderData()
+          const postDetail = useLoaderData()        
+          const [postDetails, setPostDetails] = useState(postDetail)
+          
 
           const handleComment = (data) =>{
                const comment ={
@@ -45,15 +47,36 @@ function ShowDetails() {
                headers:{
                     'content-type' : 'application/json'
                },
-               body: JSON.stringify(id)
+               body: JSON.stringify({id})
             }) 
             .then(res => res.json())
-            .then(data => console.log(data))     
+            .then(data => {
+                if(data.modifiedCount > 0){
+                    toast.success('like successfuly')
+                    const remaingDetails = postDetails.filter(like => like._id == id)
+                    setPostDetails(remaingDetails);
+                }
+            })     
 
 
           }
 
-          const lovePost = () =>{
+          const lovePost = (id) =>{
+               fetch(`http://localhost:5000/love/${id}`,{
+                    method: 'PUT',
+                    headers:{
+                         'content-type' : 'application/json'
+                    },
+                    body: JSON.stringify({id})
+                 }) 
+                 .then(res => res.json())
+                 .then(data => {
+                     if(data.modifiedCount > 0){
+                         toast.success('love successfuly')
+                         const remaingDetails = postDetails.filter(like => like._id == id)
+                         setPostDetails(remaingDetails);
+                     }
+                 }) 
 
           }
           
@@ -85,7 +108,8 @@ function ShowDetails() {
 							<img alt="" className="w-5 h-5 border rounded-full dark:bg-gray-500 dark:border-gray-800" src="https://source.unsplash.com/40x40/?portrait?3" />
 						</div>
 						<div className='ml-72'>
-						<button><FaRegHeart className='text-black'></FaRegHeart>{postDetail?.love?.length}</button> <button onClick={() =>{likepost(postDetail?._id)}} className='ml-2 text-black'><FaRegThumbsUp></FaRegThumbsUp>{postDetail?.love?.length}</button>
+						<button onClick={()=>lovePost(postDetail?._id)}><FaRegHeart className='text-black'></FaRegHeart>{postDetail?.love?.length}</button> <button onClick={() =>{likepost(postDetail?._id)}} className='ml-2 text-black'><FaRegThumbsUp></FaRegThumbsUp>{postDetail?.like?.length}</button>
+
 					</div>
 					</div>
 				</div>
