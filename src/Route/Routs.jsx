@@ -1,10 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import About from "../pages/About/About";
+import AddPost from "../pages/AddPost/AddPost";
 import Home from "../pages/Home/Home";
 import ShowDetails from "../pages/ShowDetails/ShowDetails";
 import SignIn from "../pages/SignIn/SignIn";
 import SignUp from "../pages/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute/PrivateRoute";
 
 
 const Routs = createBrowserRouter([
@@ -27,12 +29,16 @@ const Routs = createBrowserRouter([
                {
                     path:'/showDetails/:id',
                     loader: ({params}) => fetch(`http://localhost:5000/postdetails/${params.id}`),
-                    element:<ShowDetails></ShowDetails>
+                    element:<PrivateRoute><ShowDetails></ShowDetails></PrivateRoute>
                },
                {
                     path: '/about',
                     element:<About></About>
-               }
+               },
+               {
+                    path: '/addpost',
+                    element: <PrivateRoute><AddPost></AddPost></PrivateRoute>
+               },
           ]
      }
 ])

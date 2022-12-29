@@ -4,6 +4,7 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 
 
+
 function ShowMedia({allpostCollection}) {
    
   return (
@@ -44,7 +45,7 @@ function ShowMedia({allpostCollection}) {
 					</p>					
 				</div>
 				<div className='ml-[275px]'>
-				   <Link to={`showDetails/${allpost._id}`}><button className='btn btn-outline btn-info btn-sm'>Details</button></Link>
+				<Link to={`showDetails/${allpost._id}`}><button className='btn btn-outline btn-info btn-sm'>Details</button></Link>
 				</div>
 			</div>
 		</div>)

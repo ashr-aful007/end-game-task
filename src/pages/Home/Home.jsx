@@ -10,13 +10,15 @@ function Home() {
       queryFn: () => fetch('http://localhost:5000/allpost')
       .then(res => res.json())
    })
+   
   return (
      <div className='pt-28'>
       <div className='grid grid-rows-2 md:gap-10 md:grid-cols-2 h-full m-5'>
           <div>
              <div className=' h-screen'>
              <div>
-                <AddPost refetch={refetch}></AddPost>
+             <AddPost refetch={refetch}></AddPost>
+                
              </div>
              <div>
                  <p className='text-xl mt-16'>Media section</p>
@@ -25,7 +27,7 @@ function Home() {
              </div>
           </div>
           <div className='h-screen'>
-             <p className='text-xl'>popular post</p>
+             <p className='text-2xl mb-10'>popular post</p>
              <PopularPost></PopularPost>
           </div>
       </div>  
