@@ -45,7 +45,12 @@ function About() {
         </div>
           </div>)
      }
-     <EditAbout userData={userData}></EditAbout>
+     {
+          userData.map(userDt =><EditAbout userDt={userDt}
+               refetch={refetch}
+               key={userDt._id}
+               ></EditAbout>)
+     }
     </div>
   )
 }
