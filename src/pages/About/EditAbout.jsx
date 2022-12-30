@@ -11,7 +11,7 @@ function EditAbout({userDt,refetch}) {
                university: data.versity,
                address: data.address
            }
-           fetch(`http://localhost:5000/editporfile/${_id}`,{
+           fetch(`https://end-game-backend.vercel.app/editporfile/${_id}`,{
                method:'PUT',
                headers:{
                     'content-type' : 'application/json'

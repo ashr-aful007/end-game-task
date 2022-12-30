@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 function PopularPost({allpost}) {
   const {isLoading,data: popularPost = [],refetch} = useQuery({
     queryKey:['poplurPost'],
-    queryFn: () => fetch('http://localhost:5000/poplurPost')
+    queryFn: () => fetch('https://end-game-backend.vercel.app/poplurPost')
     .then(res => res.json())
  })
   console.log(popularPost)

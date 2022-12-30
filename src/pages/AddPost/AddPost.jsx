@@ -38,7 +38,7 @@ function AddPost({refetch}) {
           love:[]
         }
 
-        fetch('http://localhost:5000/userpost', {
+        fetch('https://end-game-backend.vercel.app/userpost', {
            method: 'POST',
            headers:{
              'content-type' : 'application/json'

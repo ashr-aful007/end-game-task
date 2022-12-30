@@ -10,7 +10,7 @@ function About() {
      const {user} = useContext(AuthContext)
      const {isLoading,data: userData = [],refetch} = useQuery({
           queryKey:['userInfo', user?.email],
-          queryFn: () => fetch(`http://localhost:5000/userInfo?email=${user?.email}`)
+          queryFn: () => fetch(`https://end-game-backend.vercel.app/userInfo?email=${user?.email}`)
           .then(res => res.json())
        })
        console.log(userData)

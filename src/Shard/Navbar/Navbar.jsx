@@ -31,8 +31,9 @@ const Navbar = () => {
   return (
     <div className='fixed w-full h-[65px] flex justify-between items-center px-4 bg-[#2b66bf] text-gray-300'>
       <div>
+        <Link to='/'>
         <img className='w-16' src={logo} alt="logo" /> 
-        
+        </Link>   
       </div>
 
       {/* menu */}
@@ -41,10 +42,7 @@ const Navbar = () => {
           <Link to='/'>Media</Link>
         </li>
         <li>
-        <Link to='/about'>About</Link>
-        </li>
-        <li>
-        { user?.email ? <button onClick={handleLogout}>Log Out</button> : <button><Link to='/signup'>SignUp</Link></button>}
+        { user?.email ? <><li><Link to='/about'>About</Link></li><button onClick={handleLogout}>Log Out</button></>  : <button><Link to='/signup'>SignUp</Link></button>}
         </li>
       </ul>
 

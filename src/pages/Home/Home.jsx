@@ -7,7 +7,7 @@ import ShowMedia from '../ShowMedia/ShowMedia'
 function Home() {
    const {isLoading,data: allpostCollection = [],refetch} = useQuery({
       queryKey:['allpost'],
-      queryFn: () => fetch('http://localhost:5000/allpost')
+      queryFn: () => fetch('https://end-game-backend.vercel.app/allpost')
       .then(res => res.json())
    })
    

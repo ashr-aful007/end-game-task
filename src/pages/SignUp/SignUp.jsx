@@ -29,7 +29,7 @@ function SignUp() {
              university: data.university,
              address: data.address
           }
-          fetch('http://localhost:5000/user',{
+          fetch('https://end-game-backend.vercel.app/user',{
             method: 'POST',
             headers:{
                'content-type' : 'application/json'

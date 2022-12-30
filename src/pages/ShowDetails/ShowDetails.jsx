@@ -15,7 +15,7 @@ function ShowDetails() {
           
      const {isLoading,data: postDetails = [],refetch} = useQuery({
           queryKey:[],
-           queryFn: () => fetch(`http://localhost:5000/postdetails/${id}`)
+           queryFn: () => fetch(`https://end-game-backend.vercel.app/postdetails/${id}`)
            .then(res => res.json())
      })
 
@@ -26,7 +26,7 @@ function ShowDetails() {
                   comment: data.comment,
                   date: new Date()
                }
-               fetch(`http://localhost:5000/comment`,{
+               fetch(`https://end-game-backend.vercel.app/comment`,{
                     method: 'POST',
                     headers:{
                          'content-type' : 'application/json'
@@ -43,7 +43,7 @@ function ShowDetails() {
            
           }
           useEffect(() =>{
-               fetch('http://localhost:5000/comment')
+               fetch('https://end-game-backend.vercel.app/comment')
                .then(res => res.json())
                .then(result => {
                     if(result.acknowledged){
@@ -59,7 +59,7 @@ function ShowDetails() {
 
 
           const likepost = (id) =>{
-            fetch(`http://localhost:5000/like/${id}`,{
+            fetch(`https://end-game-backend.vercel.app/like/${id}`,{
                method: 'PUT',
                headers:{
                     'content-type' : 'application/json'
@@ -78,7 +78,7 @@ function ShowDetails() {
           }
 
           const lovePost = (id) =>{
-               fetch(`http://localhost:5000/love/${id}`,{
+               fetch(`https://end-game-backend.vercel.app/love/${id}`,{
                     method: 'PUT',
                     headers:{
                          'content-type' : 'application/json'
