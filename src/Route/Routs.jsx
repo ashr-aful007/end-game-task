@@ -28,7 +28,6 @@ const Routs = createBrowserRouter([
                },
                {
                     path:'/showDetails/:id',
-                    loader: ({params}) => fetch(`http://localhost:5000/postdetails/${params.id}`),
                     element:<PrivateRoute><ShowDetails></ShowDetails></PrivateRoute>
                },
                {

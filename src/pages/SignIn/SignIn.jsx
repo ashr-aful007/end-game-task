@@ -8,7 +8,7 @@ import { AuthContext } from '../../Contaxt/AuthProvider'
 function SignIn() {
   const {register,reset,handleSubmit,formState: { errors }} = useForm()
   const [loginError, setSignInError] = useState('')
-  const {signIn} = useContext(AuthContext)
+  const {signIn,googleSignIn} = useContext(AuthContext)
 
   const location = useLocation()
   const navigate = useNavigate()
@@ -27,6 +27,10 @@ function SignIn() {
       setSignInError(err.message)
     })
      
+  }
+
+  const handleGoogleSignIn = () =>{
+    googleSignIn()
   }
 
 
@@ -55,7 +59,7 @@ function SignIn() {
 </form>
 <p className=''>New to toke<Link className='text-secondary' to="/signup">Create new account!</Link></p>
   <div className="divider">OR</div>
-  <button className='btn btn-outline w-full'>COUNTINUE WITH GOOGLE</button>
+  <button onClick={handleGoogleSignIn} className='btn btn-outline w-full'>COUNTINUE WITH GOOGLE</button>
     </div>
 </div>
   )

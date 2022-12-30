@@ -41,13 +41,10 @@ const Navbar = () => {
           <Link to='/'>Media</Link>
         </li>
         <li>
-        <Link to='/signup'>SignUp</Link>
-        </li>
-        <li>
         <Link to='/about'>About</Link>
         </li>
         <li>
-        { user?.email &&<button onClick={handleLogout}>Log Out</button>}
+        { user?.email ? <button onClick={handleLogout}>Log Out</button> : <button><Link to='/signup'>SignUp</Link></button>}
         </li>
       </ul>
 
@@ -74,7 +71,7 @@ const Navbar = () => {
         <Link href='/about'>About</Link>
         </li>
         <li className='py-6 text-4xl'>
-          { user?.email &&<button className='btn' onClick={handleLogout}>Log Out</button>}
+        { user?.email ? <button onClick={handleLogout}>Log Out</button> : <button><Link to='/signup'>SignUp</Link></button>}
         </li>
       </ul>
     </div>

@@ -1,16 +1,25 @@
 import { useQuery } from '@tanstack/react-query'
-import React, { useState } from 'react'
+import { data } from 'autoprefixer'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import { FaRegHeart, FaRegThumbsUp } from 'react-icons/fa'
-import { useLoaderData } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import ShowComment from '../ShowComment/ShowComment'
 
 function ShowDetails() {
-     const {register,reset,handleSubmit,formState: { errors }} = useForm()
-          const postDetail = useLoaderData()        
-          const [postDetails, setPostDetails] = useState(postDetail)
+     const {register,reset,handleSubmit,formState: { errors }} = useForm()       
+     const [allcommentCollection, setallcommentCollection] = useState([])
+
+     const {id} = useParams()
           
+     const {isLoading,data: postDetails = [],refetch} = useQuery({
+          queryKey:[],
+           queryFn: () => fetch(`http://localhost:5000/postdetails/${id}`)
+           .then(res => res.json())
+     })
+
+   
 
           const handleComment = (data) =>{
                const comment ={
@@ -31,14 +40,22 @@ function ShowDetails() {
                     refetch()
                     console.log(data)
                })
+           
           }
+          useEffect(() =>{
+               fetch('http://localhost:5000/comment')
+               .then(res => res.json())
+               .then(result => {
+                    if(result.acknowledged){
+                         refetch()
+                    }
+                    setallcommentCollection(result)
+               })
+          }, [allcommentCollection])
 
-          const {isLoading,data: allcommentCollection = [],refetch} = useQuery({
-               queryKey:[],
-               queryFn: () => fetch('http://localhost:5000/comment')
-               .then(res => res.json())      
-          })
-          
+            if(isLoading){
+          return<p>Loading...</p>
+     }
 
 
           const likepost = (id) =>{
@@ -53,8 +70,7 @@ function ShowDetails() {
             .then(data => {
                 if(data.modifiedCount > 0){
                     toast.success('like successfuly')
-                    const remaingDetails = postDetails.filter(like => like._id == id)
-                    setPostDetails(remaingDetails);
+                    refetch()
                 }
             })     
 
@@ -73,8 +89,7 @@ function ShowDetails() {
                  .then(data => {
                      if(data.modifiedCount > 0){
                          toast.success('love successfuly')
-                         const remaingDetails = postDetails.filter(like => like._id == id)
-                         setPostDetails(remaingDetails);
+                         refetch()
                      }
                  }) 
 

@@ -87,7 +87,6 @@ function SignUp() {
 </form>
 <p className='mb-4'>Already have an account please<Link className='text-secondary' to="/signIn">login!</Link></p>
   <div className="divider">OR</div>
-  <button className='btn btn-outline w-full'>COUNTINUE WITH GOOGLE</button>
     </div>
 </div>
   )
