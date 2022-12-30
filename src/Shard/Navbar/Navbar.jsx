@@ -38,11 +38,11 @@ const Navbar = () => {
 
       {/* menu */}
       <ul className='hidden md:flex'>
-        <li>
+        <button>
           <Link to='/'>Media</Link>
-        </li>
+        </button>
         <li>
-        { user?.email ? <><li><Link to='/about'>About</Link></li><button onClick={handleLogout}>Log Out</button></>  : <button><Link to='/signup'>SignUp</Link></button>}
+        { user?.email ? <><button className='m-3'><Link to='/about'>About</Link></button><button onClick={handleLogout}>Log Out</button></>  : <button><Link to='/signup'>SignUp</Link></button>}
         </li>
       </ul>
 
